@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {{>header}}
+</head>
+
+<body>
+    <div class="container-xxl position-relative bg-white d-flex p-0">
+        <!-- Spinner Start -->
+        {{>spinner}}
+        <!-- Spinner End -->
+
+
+        <!-- Sidebar Start -->
+        {{>sidebar}}
+        <!-- Sidebar End -->
+
+
+        <!-- Content Start -->
+        <div class="content">
+            <!-- Navbar Start -->
+            {{>navbar}}
+            <!-- Navbar End -->
+
+            <!-- Match Start -->
+            <div class="container-fluid pt-4 px-4">
+                <div class="row g-4">
+                    <div class="col-sm-12 col-xl-6">
+                        <div class="bg-light text-center rounded p-4">
+                            <div class="d-flex align-items-center justify-content-between mb-4">
+                                <h6 class="mb-0">Latest Match</h6>
+                            </div>
+                            {{#lastestMatch}}
+                            <div class="scoreline">
+                                <h2>{{homeTeam}} {{result}} {{awayTeam}}</h2>
+                                <p>Match Date: {{date}} Time: {{time}}</p>
+                                <p>Location: {{venue}} Status: {{status}}</p>
+                            </div>
+                            {{/lastestMatch}}
+                            {{^lastestMatch}}
+                                <div>
+                                    <h2>No Latest Match Available</h2>
+                                </div>
+                            {{/lastestMatch}}
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-xl-6">
+                        <div class="bg-light text-center rounded p-4">
+                            <div class="d-flex align-items-center justify-content-between mb-4">
+                                <h6 class="mb-0">Next Match</h6>
+                            </div>
+                            {{#nextMatch}}
+                            <div class="next-match-details">
+                                <h2>{{homeTeam}} vs {{awayTeam}}</h2>
+                                <p>Date: {{date}} Time: {{time}}</p>
+                                <p>Location: {{venue}}</p>
+                            </div>
+                            {{/nextMatch}}
+                            {{^nextMatch}}
+                                <div>
+                                    <h2>No Upcoming Match Available</h2>
+                                </div>
+                            {{/nextMatch}}
+                        </div>
+                    </div>                    
+                </div>
+            </div>
+            <!-- Match End -->
+
+
+            <!-- Standings Start -->
+            <div class="container-fluid pt-4 px-4">
+                <div class="bg-light text-center rounded p-4">
+                    <div class="d-flex align-items-center justify-content-between mb-4">
+                        <h6 class="mb-0">League Standings</h6>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table text-start align-middle table-bordered table-hover mb-0">
+                            <thead>
+                                <tr class="text-dark">
+                                    <th scope="col">POS</th>
+                                    <th scope="col">Team</th>
+                                    <th scope="col">Played</th>
+                                    <th scope="col" class="d-none d-md-table-cell">Won</th>
+                                    <th scope="col" class="d-none d-md-table-cell">Drawn</th>
+                                    <th scope="col" class="d-none d-md-table-cell">Lost</th>
+                                    <th scope="col" class="d-none d-lg-table-cell">GF</th>
+                                    <th scope="col" class="d-none d-lg-table-cell">GA</th>
+                                    <th scope="col">GD</th>
+                                    <th scope="col">Points</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Mcengeni FC</td>
+                                    <td>38</td>
+                                    <td class="d-none d-md-table-cell">26</td>
+                                    <td class="d-none d-md-table-cell">8</td>
+                                    <td class="d-none d-md-table-cell">4</td>
+                                    <td class="d-none d-lg-table-cell">80</td>
+                                    <td class="d-none d-lg-table-cell">30</td>
+                                    <td >50</td>
+                                    <td>86</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Mcengeni Sundowns</td>
+                                    <td>38</td>
+                                    <td class="d-none d-md-table-cell">25</td>
+                                    <td class="d-none d-md-table-cell">10</td>
+                                    <td class="d-none d-md-table-cell">3</td>
+                                    <td class="d-none d-lg-table-cell">78</td>
+                                    <td class="d-none d-lg-table-cell">28</td>
+                                    <td >50</td>
+                                    <td>85</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>Five Hearts</td>
+                                    <td>38</td>
+                                    <td class="d-none d-md-table-cell">24</td>
+                                    <td class="d-none d-md-table-cell">8</td>
+                                    <td class="d-none d-md-table-cell">6</td>
+                                    <td class="d-none d-lg-table-cell">75</td>
+                                    <td class="d-none d-lg-table-cell">35</td>
+                                    <td>40</td>
+                                    <td>80</td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>Nsuka United</td>
+                                    <td>38</td>
+                                    <td class="d-none d-md-table-cell">22</td>
+                                    <td class="d-none d-md-table-cell">10</td>
+                                    <td class="d-none d-md-table-cell">6</td>
+                                    <td class="d-none d-lg-table-cell">70</td>
+                                    <td class="d-none d-lg-table-cell">32</td>
+                                    <td>38</td>
+                                    <td>76</td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>Nsuka Fighters</td>
+                                    <td>38</td>
+                                    <td class="d-none d-md-table-cell">20</td>
+                                    <td class="d-none d-md-table-cell">10</td>
+                                    <td class="d-none d-md-table-cell">8</td>
+                                    <td class="d-none d-lg-table-cell">65</td>
+                                    <td class="d-none d-lg-table-cell">35</td>
+                                    <td>30</td>
+                                    <td>70</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Standings End -->
+
+
+            <!-- Widgets Start -->
+            <div class="container-fluid pt-4 px-4">
+                <div class="row g-4">
+                    <div class="col-sm-12 col-md-6 col-xl-4">
+                        <div class="h-100 bg-light rounded p-4">
+                            <div class="d-flex align-items-center justify-content-between mb-2">
+                                <h6 class="mb-0">Recent Result</h6>
+                            </div>
+                            {{#results}}
+                            <div class="d-flex align-items-center border-bottom py-3">
+                                <img class="rounded-circle flex-shrink-0" src="img/teamA.png" alt="" style="width: 40px; height: 40px;">
+                                <div class="w-100 ms-3">
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h6 class="mb-0">{{homeTeam}} {{result}} {{awayTeam}}</h6>
+                                        <small>{{venue}}</small>
+                                    </div>
+                                    <span>{{venue}}</span>
+                                </div>
+                            </div>
+                            {{/results}}
+                            {{^results}}
+                            <h6 class="mb-0">No Recent Results</h6>
+                            {{/results}}
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-xl-4">
+                        <div class="h-100 bg-light rounded p-4">
+                            <div class="d-flex align-items-center justify-content-between mb-4">
+                                <h6 class="mb-0">Upcoming Fixtures</h6>
+                            </div>
+                            {{#fixtures}}
+                            <div class="d-flex align-items-center border-bottom py-3">
+                                <div class="fixture">
+                                    <div class="fixture-date">{{date}}</div>
+                                    <div class="fixture-teams">{{homeTeam}} vs {{awayTeam}}</div>
+                                    <div class="fixture-time">{{time}}</div>
+                                    <div class="fixture-location">{{venue}}</div>
+                                </div>
+                            </div>
+                            {{/fixtures}}
+                            {{^fixtures}}
+                            <h6 class="mb-0">No Upcoming Fixtures</h6>
+                            {{/fixtures}}
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-xl-4">
+                        <div class="h-100 bg-light rounded p-4">
+                            <div class="d-flex align-items-center justify-content-between mb-4">
+                                <h6 class="mb-0">Latest News</h6>
+                            </div>
+                            <div class="news-items">
+                                <div class="news-item border-bottom py-2">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="news-1">
+                                        <label class="form-check-label" for="news-1">
+                                            Transfer News: Team A signs new striker!
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="news-item border-bottom py-2">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="news-2">
+                                        <label class="form-check-label" for="news-2">
+                                            Injury Update: Star player of Team B out for upcoming match.
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="news-item border-bottom py-2">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="news-3">
+                                        <label class="form-check-label" for="news-3">
+                                            Team C Manager's Press Conference Highlights.
+                                        </label>
+                                    </div>
+                                </div>
+                                <!-- Add more news items as needed -->
+                            </div>
+                            <div class="d-flex mb-2">
+                                <input class="form-control bg-transparent" type="text" placeholder="Add new news">
+                                <button type="button" class="btn btn-primary ms-2">Add</button>
+                            </div>
+                        </div>
+                    </div>    
+                </div>
+            </div>
+            
+            <!-- Widgets End -->
+
+
+            <!-- Footer Start -->
+            {{>footer}}
+            <!-- Footer End -->
+        </div>
+        <!-- Content End -->
+
+
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+    </div>
+    {{>scripts}}
+    </body>
+
+</html>

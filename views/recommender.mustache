@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {{>header}}
+</head>
+
+<body>
+    <div class="container-xxl position-relative bg-white d-flex p-0">
+        <!-- Spinner Start -->
+        {{>spinner}}
+        <!-- Spinner End -->
+
+
+        <!-- Sidebar Start -->
+        {{>sidebar}}
+        <!-- Sidebar End -->
+
+
+        <!-- Content Start -->
+        <div class="content">
+            <!-- Navbar Start -->
+            {{>navbar}}
+            <!-- Navbar End -->
+
+            <!-- Blank Start -->
+            <div class="container-fluid pt-4 px-4">
+                <div class="bg-light rounded h-100 p-4">
+                    <h6 class="mb-4">Player Information</h6>
+
+                    <form action="/predict" method="POST">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="playerID" name="playerID" placeholder="Player ID">
+                            <label for="playerID">Player ID</label>
+                        </div>
+                        
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="name" name="name" placeholder="Name">
+                            <label for="name">Name</label>
+                        </div>
+                        
+                        <div class="form-floating mb-3">
+                            <input type="number" class="form-control" id="age" name="age" placeholder="Age">
+                            <label for="age">Age</label>
+                        </div>
+                        
+                        <div class="form-floating mb-3">
+                            <select class="form-control" id="position" name="position">
+                                <option value="2">Goalkeeper</option>
+                                <option value="0">Defender</option>
+                                <option value="3">Midfielder</option>
+                                <option value="1">Forward</option>
+                            </select>
+                            <label for="position">Position</label>
+                        </div>
+
+                        
+                        <div class="form-floating mb-3">
+                            <input type="number" class="form-control" id="matchesPlayed" name="matchesPlayed" placeholder="Matches Played">
+                            <label for="matchesPlayed">Matches Played</label>
+                        </div>
+                        
+                        <div class="form-floating mb-3">
+                            <input type="number" class="form-control" id="goals" name="goals" placeholder="Goals">
+                            <label for="goals">Goals</label>
+                        </div>
+                        
+                        <div class="form-floating mb-3">
+                            <input type="number" class="form-control" id="assists" name="assists" placeholder="Assists">
+                            <label for="assists">Assists</label>
+                        </div>
+                        
+                        <div class="form-floating mb-3">
+                            <input type="number" class="form-control" id="tackles" name="tackles" placeholder="Tackles">
+                            <label for="tackles">Tackles</label>
+                        </div>
+                        
+                        <div class="form-floating mb-3">
+                            <input type="number" class="form-control" id="passesCompleted" name="passesCompleted" placeholder="Passes Completed">
+                            <label for="passesCompleted">Passes Completed</label>
+                        </div>
+                        
+                        <div class="form-floating mb-3">
+                            <input type="number" class="form-control" id="distanceCovered" name="distanceCovered" placeholder="Distance Covered (km)">
+                            <label for="distanceCovered">Distance Covered (km)</label>
+                        </div>
+                        
+                        <div class="form-floating mb-3">
+                            <input type="number" class="form-control" id="sprints" name="sprints" placeholder="Sprints">
+                            <label for="sprints">Sprints</label>
+                        </div>
+                        
+                        <div class="form-floating mb-3">
+                            <input type="number" class="form-control" id="injuries" name="injuries" placeholder="Injuries">
+                            <label for="injuries">Injuries</label>
+                        </div>
+                        
+                        <div class="form-floating mb-3">
+                            <input type="number" class="form-control" id="fitnessLevel" name="fitnessLevel" placeholder="Fitness Level (1-10)">
+                            <label for="fitnessLevel">Fitness Level (1-10)</label>
+                        </div>
+                        
+                        <div class="form-floating mb-3">
+                            <input type="number" class="form-control" id="trainingHours" name="trainingHours" placeholder="Training Hours/Week">
+                            <label for="trainingHours">Training Hours/Week</label>
+                        </div>
+                        
+                        <input type="submit" class="btn btn-primary" value="Recommend Training Focus">
+                    </form>
+                </div>
+            </div>
+            {{#recommendations}}
+            <div class="container-fluid pt-4 px-4">
+                <div class="bg-light rounded h-100 p-4">
+                    <h6 class="mb-4">Recommended Training Focus Areas</h6>
+                    <ol>
+                        <li>{{t1Prediction}}</li>
+                        <li>{{t2Prediction}}</li>
+                    </ol>
+                </div>
+            </div>
+            {{/recommendations}}
+            {{^recommendations}}
+            <div class="container-fluid pt-4 px-4">
+                <div class="bg-light rounded h-100 p-4">
+                    <h6 class="mb-4">No Recommendations Available</h6>
+                    <p>Please provide valid input data to receive training focus recommendations.</p>
+                </div>
+            </div>
+            {{/recommendations}}
+
+            <!-- Blank End -->
+
+
+            <!-- Footer Start -->
+            {{>footer}}
+            <!-- Footer End -->
+        </div>
+        <!-- Content End -->
+
+
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+    </div>
+
+    {{>scripts}}
+</body>
+
+</html>

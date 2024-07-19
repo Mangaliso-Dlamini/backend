@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+{{>header}}
+</head>
+
+<body>
+    <div class="container-xxl position-relative bg-white d-flex p-0">
+        <!-- Spinner Start -->
+        {{>spinner}}
+        <!-- Spinner End -->
+
+
+        <!-- Sidebar Start -->
+        {{>sidebar}}
+        <!-- Sidebar End -->
+
+
+        <!-- Content Start -->
+        <div class="content">
+            <!-- Navbar Start -->
+            {{>navbar}}
+            <!-- Navbar End -->
+
+            <div class="container-fluid pt-4 px-4">
+                <div class="bg-light rounded-top p-4">
+                    <div class="row">
+                        <div class="col-sm-12 col-xl-12">
+                            <div class="bg-light rounded h-100 p-4">
+                                <h6 class="mb-4">Manage Matches</h6>
+                                <div class="m-n2">
+                                    <button type="button" class="btn btn-primary m-2" data-bs-toggle="modal" data-bs-target="#create-match">Create Match</button>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- The Modal -->
+            <div class="modal" id="create-match">
+                <div class="modal-dialog">
+                <div class="modal-content">
+            
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                    <h4 class="modal-title">Create Match</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+            
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <div class="col-sm-12 col-xl-6">
+                            <div class="bg-light rounded h-100 p-4">
+                                <h6 class="mb-4">Register Football Match</h6>
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" id="floatingMatchTitle" placeholder="Match Title">
+                                    <label for="floatingMatchTitle">Match Title</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" id="floatingTeam1" placeholder="Team 1">
+                                    <label for="floatingTeam1">Team 1</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" id="floatingTeam2" placeholder="Team 2">
+                                    <label for="floatingTeam2">Team 2</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input type="date" class="form-control" id="floatingMatchDate" placeholder="Match Date">
+                                    <label for="floatingMatchDate">Match Date</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input type="time" class="form-control" id="floatingMatchTime" placeholder="Match Time">
+                                    <label for="floatingMatchTime">Match Time</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" id="floatingStadium" placeholder="Stadium">
+                                    <label for="floatingStadium">Stadium</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <select class="form-select" id="floatingReferee" aria-label="Floating label select example">
+                                        <option selected>Open this select menu</option>
+                                        <option value="Referee 1">Referee 1</option>
+                                        <option value="Referee 2">Referee 2</option>
+                                        <option value="Referee 3">Referee 3</option>
+                                    </select>
+                                    <label for="floatingReferee">Referee</label>
+                                </div>
+                                <div class="form-floating">
+                                    <textarea class="form-control" placeholder="Leave a comment here" id="floatingMatchComments" style="height: 150px;"></textarea>
+                                    <label for="floatingMatchComments">Comments</label>
+                                </div>
+                            </div>
+                        </div>                        
+                    </div>
+            
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                    </div>
+            
+                </div>
+                </div>
+            </div>  
+
+            <!-- Matches Start -->
+            <div class="container-fluid pt-4 px-4">
+                <div class="row g-4">
+                    <div class="col-sm-12 col-md-6">
+                        <div class="h-100 bg-light rounded p-4">
+                            <div class="d-flex align-items-center justify-content-between mb-2">
+                                <h6 class="mb-0">Recent Result</h6>
+                            </div>
+                            {{#results}}
+                            <div class="d-flex align-items-center border-bottom py-3">
+                                <img class="rounded-circle flex-shrink-0" src="img/teamA.png" alt="" style="width: 40px; height: 40px;">
+                                <div class="w-100 ms-3">
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h6 class="mb-0">{{homeTeam}} {{result}} {{awayTeam}}</h6>
+                                        <small>{{venue}}</small>
+                                    </div>
+                                    <span>{{venue}}</span>
+                                </div>
+                            </div>
+                            {{/results}}
+                            {{^results}}
+                            <h6 class="mb-0">No Recent Results</h6>
+                            {{/results}}
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6">
+                        <div class="h-100 bg-light rounded p-4">
+                            <div class="d-flex align-items-center justify-content-between mb-4">
+                                <h6 class="mb-0">Upcoming Fixtures</h6>
+                            </div>
+                            {{#fixtures}}
+                            <div class="d-flex align-items-center border-bottom py-3">
+                                <div class="fixture">
+                                    <div class="fixture-date">{{date}}</div>
+                                    <div class="fixture-teams">{{homeTeam}} vs {{awayTeam}}</div>
+                                    <div class="fixture-time">{{time}}</div>
+                                    <div class="fixture-location">{{venue}}</div>
+                                </div>
+                            </div>
+                            {{/fixtures}}
+                            {{^fixtures}}
+                            <h6 class="mb-0">No Upcoming Fixtures</h6>
+                            {{/fixtures}}
+                        </div>
+                    </div>
+    
+                </div>
+            </div>
+            <!-- Matches End -->
+
+
+            <!-- Footer Start -->
+            {{>footer}}
+            <!-- Footer End -->
+        </div>
+        <!-- Content End -->
+
+
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+    </div>
+
+    {{>scripts}}
+</body>
+
+</html>
