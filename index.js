@@ -38,12 +38,14 @@ const scheduleRoute = require('./routes/schedule');
 const messageRoute = require('./routes/message');
 const performanceRoute = require('./routes/performance');
 const appRoutes = require('./routes/app');
+const paymentRoutes = require('./routes/payment');
 app.use('/', appRoutes);
 app.use('/api/performance', performanceRoute);
 app.use('/api/messages', messageRoute);
 app.use('/api/schedules', scheduleRoute);
 app.use('/api/teams', teamRoute);
 app.use('/api/auth', authRoute);
+app.use('/api/paypal', paymentRoutes);
 
 // MongoDB connection
 mongoose.connect('mongodb+srv://mdlamini:hQcXeAtFUeKyQtEx@hp.54gjgph.mongodb.net/?retryWrites=true&w=majority&appName=HP')

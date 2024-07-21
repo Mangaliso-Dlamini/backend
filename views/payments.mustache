@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {{>header}}
+</head>
+
+<body>
+    <div class="container-xxl position-relative bg-white d-flex p-0">
+        <!-- Spinner Start -->
+        {{>spinner}}
+        <!-- Spinner End -->
+
+
+        <!-- Sidebar Start -->
+        {{>sidebar}}
+        <!-- Sidebar End -->
+
+
+        <!-- Content Start -->
+        <div class="content">
+            <!-- Navbar Start -->
+            {{>navbar}}
+            <!-- Navbar End -->
+
+            <!-- Blank Start -->
+            <div class="container-fluid pt-4 px-4">
+                <div class="row vh-100 bg-light rounded align-items-center justify-content-center mx-0">
+                    <div class="col-md-6 text-center">
+                        <div id="paypal-button-container"></div>
+                        <p id="result-message"></p>
+                        <!-- Replace the "test" client-id value with your client-id -->
+                        <script src="https://www.paypal.com/sdk/js?client-id=ARnRGPOvNwa-UbZuZWOM1lSnmQBPwUSnpVDkElZyMeM6jUjjf8-h1GBznFMaCllmIT5c-cPMxS5QVYfi&components=buttons&enable-funding=venmo,paylater" data-sdk-integration-source="integrationbuilder_sc"></script>
+                        <script src="js/payment.js"></script>
+                    </div>
+                </div>
+            </div>
+            <!-- Blank End -->
+
+
+            <!-- Footer Start -->
+            {{>footer}}
+            <!-- Footer End -->
+        </div>
+        <!-- Content End -->
+
+
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+    </div>
+
+    {{>scripts}}
+    </body>
+
+</html>

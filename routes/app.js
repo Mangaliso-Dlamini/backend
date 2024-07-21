@@ -51,4 +51,8 @@ router.get('/leagues', async(req, res)=>{
     res.render('leagues')
 });
 
+router.get('/payments', async(req, res)=>{
+    res.render('payments')
+})
+
 module.exports = router;
