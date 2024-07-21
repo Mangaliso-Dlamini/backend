@@ -55,4 +55,8 @@ router.get('/payments', async(req, res)=>{
     res.render('payments')
 })
 
+router.get('/recommender', async(req, res)=>{
+    res.render('recommender');
+});
+
 module.exports = router;
