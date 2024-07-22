@@ -46,7 +46,7 @@ app.use('/api/messages', messageRoute);
 app.use('/api/schedules', scheduleRoute);
 app.use('/api/teams', teamRoute);
 app.use('/api/auth', authRoute);
-app.use('/api/paypal', paymentRoutes);
+app.use('/api/orders', paymentRoutes);
 app.use('/predict', predictRoutes);
 
 // MongoDB connection
