@@ -41,6 +41,8 @@ const appRoutes = require('./routes/app');
 const paymentRoutes = require('./routes/payment');
 const predictRoutes = require('./routes/predictRoutes');
 const messagesRouter = require('./routes/messages');
+const announcementRouter = require('./routes/announcements')
+app.use('/announcements', announcementRouter);
 app.use('/messages', messagesRouter);
 app.use('/', appRoutes);
 app.use('/api/performance', performanceRoute);

@@ -60,9 +60,39 @@ async function createCharts() {
             }]
         },
         options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    display: true,
+                    position: 'top',
+                },
+                title: {
+                    display: true,
+                    text: 'Historic Minutes per Goal Ratio',
+                    font: {
+                        size: 24
+                    }
+                }
+            },
             scales: {
-                x: { beginAtZero: true },
-                y: { beginAtZero: true }
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Years',
+                        font: {
+                            size: 18
+                        }
+                    }
+                },
+                y: {
+                    title: {
+                        display: true,
+                        text: 'Minutes per Goal',
+                        font: {
+                            size: 18
+                        }
+                    }
+                }
             }
         }
     });
@@ -81,9 +111,39 @@ async function createCharts() {
             }]
         },
         options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    display: true,
+                    position: 'top',
+                },
+                title: {
+                    display: true,
+                    text: 'Historic Shot Accuracy (%)',
+                    font: {
+                        size: 24
+                    }
+                }
+            },
             scales: {
-                x: { beginAtZero: true },
-                y: { beginAtZero: true }
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Years',
+                        font: {
+                            size: 18
+                        }
+                    }
+                },
+                y: {
+                    title: {
+                        display: true,
+                        text: 'Shot Accuracy (%)',
+                        font: {
+                            size: 18
+                        }
+                    }
+                }
             }
         }
     });
@@ -102,9 +162,39 @@ async function createCharts() {
             }]
         },
         options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    display: true,
+                    position: 'top',
+                },
+                title: {
+                    display: true,
+                    text: 'Historic Pass Accuracy (%)',
+                    font: {
+                        size: 24
+                    }
+                }
+            },
             scales: {
-                x: { beginAtZero: true },
-                y: { beginAtZero: true }
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Years',
+                        font: {
+                            size: 18
+                        }
+                    }
+                },
+                y: {
+                    title: {
+                        display: true,
+                        text: 'Pass Accuracy (%)',
+                        font: {
+                            size: 18
+                        }
+                    }
+                }
             }
         }
     });
@@ -123,9 +213,39 @@ async function createCharts() {
             }]
         },
         options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    display: true,
+                    position: 'top',
+                },
+                title: {
+                    display: true,
+                    text: 'Historic Tackle Win Rate (%)',
+                    font: {
+                        size: 24
+                    }
+                }
+            },
             scales: {
-                x: { beginAtZero: true },
-                y: { beginAtZero: true }
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Years',
+                        font: {
+                            size: 18
+                        }
+                    }
+                },
+                y: {
+                    title: {
+                        display: true,
+                        text: 'Tackle Win Rate (%)',
+                        font: {
+                            size: 18
+                        }
+                    }
+                }
             }
         }
     });

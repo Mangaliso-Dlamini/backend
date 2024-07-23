@@ -5,8 +5,7 @@ const teamController = require("../controllers/team.js");
 const playerController = require('../controllers/player.js')
 const paymentController = require('../controllers/payment.js');
 const performanceController = require('../controllers/performance.js');
-const mongoose = require('mongoose');
-const {Types} = mongoose;
+const announcementController = require('../controllers/announcements.js')
 
 
 
@@ -52,9 +51,11 @@ router.get('/matches', async(req, res)=>{
 });
 
 router.get('/performance', async(req, res)=>{
-    const seasonStats = await performanceController.getPerformanceMetrics("669f4d366761fca9af4d125a", "2024");
-    console.log(seasonStats)
-    res.render('performance',{seasonStats})
+    //const seasonStats = await performanceController.getPerformanceMetrics("669f4d366761fca9af4d125a", "2024");
+    const overallStats = await performanceController.getOverallPerformanceMetrics("669f4d366761fca9af4d125a");
+    const player = await playerController.getPlayerWithTeamName("669f4d366761fca9af4d125a");
+    console.log(overallStats)
+    res.render('performance',{overallStats, player});
 });
 
 router.get('/messages', async(req, res)=>{
@@ -86,8 +87,9 @@ router.get('/messages', async(req, res)=>{
     res.render('messages')
 })
 
-router.get('/news', async(req, res)=>{
-    res.render('news')
+router.get('/announcements', async(req, res)=>{
+    const announcements = await announcementController.getAnnouncements();
+    res.render('announcements', {announcements})
 })
 
 router.get('/logout', async(req, res)=>{

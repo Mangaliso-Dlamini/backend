@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {{>header}}
+</head>
+
+<body>
+    <div class="container-xxl position-relative bg-white d-flex p-0">
+        <!-- Spinner Start -->
+        {{>spinner}}
+        <!-- Spinner End -->
+
+
+        <!-- Sidebar Start -->
+        {{>sidebar}}
+        <!-- Sidebar End -->
+
+
+        <!-- Content Start -->
+        <div class="content">
+            <!-- Navbar Start -->
+            {{>navbar}}
+            <!-- Navbar End -->
+
+            <div class="d-flex justify-content-end m-n2 pt-4 px-4">
+                <button type="button" class="btn btn-primary m-2" data-bs-toggle="modal" data-bs-target="#create-announcement">Create New Announcements</button>
+            </div>
+
+            <div class="modal" id="create-announcement">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">Create Announcement</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <div class="col-sm-12 col-xl-12">
+                            <form action="/announcements" method="post">
+                                <div class="bg-light rounded h-100 p-4">
+                                    <h6 class="mb-4">Publish New Announcement</h6>
+                                    <div class="form-floating mb-3">
+                                        <input type="text" class="form-control" id="title" name="title" placeholder="League Name">
+                                        <label for="title">Title</label>
+                                    </div>
+                                    <div class="form-floating">
+                                        <textarea class="form-control" placeholder="Announcement Message"
+                                            id="message" name="message" style="height: 150px;"></textarea>
+                                        <label for="message">Message</label>
+                                    </div>
+                                    <div class="pt-4 px-4">
+                                        <button type="submit" class="btn btn-primary py-3 w-100 mb-4">Post Announcement</button>
+                                    </div>
+                            </div>
+                            </form>
+                        </div>
+                        
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                    </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Blank Start -->
+           <div class="container-fluid pt-4 px-4">
+                <div class="row g-4">
+                    <div class="col-sm-12 col-xl-12">
+                        <div class="bg-light rounded h-100 p-4">
+                            <h6 class="mb-4">Announcements</h6>
+                            {{#announcements.length}}
+                            <div class="accordion" id="accordionExample">
+                                {{#announcements}}
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="{{_id}}">
+                                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#collapse{{_id}}" aria-expanded="true"
+                                            aria-controls="collapse{{_id}}">
+                                            {{title}} {{date}}
+                                        </button>
+                                    </h2>
+                                    <div id="collapse{{_id}}" class="accordion-collapse collapse show"
+                                        aria-labelledby="{{_id}}" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            {{message}}
+                                        </div>
+                                    </div>
+                                </div>
+                                {{/announcements}}
+                            </div>
+                            {{/announcements.length}}
+                            {{^announcements.length}}
+                                <div>
+                                    No Announcements Available
+                                </div>
+                            {{/announcements.length}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Blank End -->
+
+
+            <!-- Footer Start -->
+            {{>footer}}
+            <!-- Footer End -->
+        </div>
+        <!-- Content End -->
+
+
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+    </div>
+
+    {{>scripts}}
+</body>
+
+</html>

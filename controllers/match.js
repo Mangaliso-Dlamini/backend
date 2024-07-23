@@ -1,4 +1,4 @@
-const Match = require('../models/Match'); // Adjust the path as necessary
+const Match = require('../models/Match'); 
 
 async function getNextScheduledMatch() {
   try {

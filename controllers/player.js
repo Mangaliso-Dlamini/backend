@@ -13,4 +13,17 @@ async function getAllPlayersWithTeamName() {
   }
 }
 
-module.exports = {getAllPlayersWithTeamName}
+async function getPlayerWithTeamName(playerID) {
+  try {
+    const players = await Player.findById(playerID)
+      .populate('team', 'name') 
+      .exec();
+
+    return players;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
+
+module.exports = {getAllPlayersWithTeamName, getPlayerWithTeamName}

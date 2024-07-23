@@ -22,16 +22,39 @@
             <!-- Navbar Start -->
             {{>navbar}}
             <!-- Navbar End -->
+            <div class="container-fluid pt-4 px-4">
+                <div class="row g-4">
+                    {{#player}}
+                    <div class="col-sm-12 col-xl-6">
+                        <div class="bg-light rounded h-100 p-4">
+                            <h6 class="mb-4">Profile</h6>
+                            <ul class="list-group">
+                                <li class="list-group-item bg-transparent">Name: {{name}}</li>
+                                <li class="list-group-item bg-transparent">Age: {{age}}</li>
+                                <li class="list-group-item bg-transparent">Position: {{position}}</li>
+                                <li class="list-group-item bg-transparent">Team: {{team.name}}</li>
+                                <li class="list-group-item bg-transparent">Jersey Number: {{jersey}}</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-xl-6">
+                        <div class="bg-light rounded h-100 p-4">
+                            <img src="/img/testimonial-1.jpg">
+                        </div>
+                    </div>
+                    {{/player}}
+                </div>
+            </div>
 
             <!-- Sale & Revenue Start -->
-            {{#seasonStats}}
+            {{#overallStats}}
             <div class="container-fluid pt-4 px-4">
                 <div class="row g-4">
                     <div class="col-sm-6 col-xl-3">
                         <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
                             <i class="fa fa-chart-line fa-3x text-primary"></i>
                             <div class="ms-3">
-                                <p class="mb-2">Minutes per Goal This Year</p>
+                                <p class="mb-2">Overall Minutes per Goal</p>
                                 <h6 class="mb-0" id="min_per_goal ">{{minutesPerGoal}}</h6>
                             </div>
                         </div>
@@ -40,7 +63,7 @@
                         <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
                             <i class="fa fa-chart-bar fa-3x text-primary"></i>
                             <div class="ms-3">
-                                <p class="mb-2">Shooting Accuracy This Year</p>
+                                <p class="mb-2">Overall Shooting Accuracy</p>
                                 <h6 class="mb-0" id="shot_accuracy">{{shotAccuracy}}%</h6>
                             </div>
                         </div>
@@ -49,7 +72,7 @@
                         <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
                             <i class="fa fa-chart-area fa-3x text-primary"></i>
                             <div class="ms-3">
-                                <p class="mb-2">Passing Accuracy This Year</p>
+                                <p class="mb-2">Overall Passing Accuracy</p>
                                 <h6 class="mb-0" id="pass_accuracy">{{passAccuracy}}%</h6>
                             </div>
                         </div>
@@ -58,48 +81,40 @@
                         <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
                             <i class="fa fa-chart-pie fa-3x text-primary"></i>
                             <div class="ms-3">
-                                <p class="mb-2">Tackles Win Rate This Year</p>
+                                <p class="mb-2">Overall Tackle Win Rate</p>
                                 <h6 class="mb-0" id="tackles">{{tackleWinRate}}%</h6>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            {{/seasonStats}}
+            {{/overallStats}}
             <!-- Sale & Revenue End -->
 
-            <!-- Blank Start -->
             <div class="container-fluid pt-4 px-4">
                 <div class="row g-4">
-                    <div class="col-sm-12 col-md-6">
-                        <div class="row vh-100 bg-light rounded align-items-center justify-content-center mx-0">
-                            <canvas id="minutesPerGoalChart" width="800" height="400"></canvas>                            
+                    <div class="col-sm-12 col-xl-6">
+                        <div class="bg-light rounded h-100 p-4">
+                            <canvas id="minutesPerGoalChart"></canvas> 
                         </div>
                     </div>
-                    <div class="col-sm-12 col-md-6">
-                        <div class="row vh-100 bg-light rounded align-items-center justify-content-center mx-0">
-                            <canvas id="shotAccuracyChart" width="800" height="400"></canvas>
-                            </div>
+                    <div class="col-sm-12 col-xl-6">
+                        <div class="bg-light rounded h-100 p-4">
+                            <canvas id="shotAccuracyChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-xl-6">
+                        <div class="bg-light rounded h-100 p-4">
+                            <canvas id="passAccuracyChart"></canvas> 
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-xl-6">
+                        <div class="bg-light rounded h-100 p-4">
+                            <canvas id="tackleWinRateChart"></canvas>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="container-fluid pt-4 px-4">
-                <div class="row g-4">
-                    <div class="col-sm-12 col-md-6">
-                        <div class="row vh-100 bg-light rounded align-items-center justify-content-center mx-0">
-                            <canvas id="passAccuracyChart" width="800" height="400"></canvas>                            
-                        </div>
-                    </div>
-                    <div class="col-sm-12 col-md-6">
-                        <div class="row vh-100 bg-light rounded align-items-center justify-content-center mx-0">
-                            <canvas id="tackleWinRateChart" width="800" height="400"></canvas>
-                            </div>
-                    </div>
-    
-                </div>
-            </div>
-            <!-- Blank End -->
-
 
             <!-- Footer Start -->
             {{>footer}}
