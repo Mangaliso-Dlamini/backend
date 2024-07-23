@@ -1,21 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     {{>header}}
 </head>
-
 <body>
     <div class="container-xxl position-relative bg-white d-flex p-0">
         <!-- Spinner Start -->
         {{>spinner}}
         <!-- Spinner End -->
 
-
         <!-- Sidebar Start -->
         {{>sidebar}}
         <!-- Sidebar End -->
-
 
         <!-- Content Start -->
         <div class="content">
@@ -23,79 +19,72 @@
             {{>navbar}}
             <!-- Navbar End -->
 
-            
-
             <div class="d-flex justify-content-end m-n2 pt-4 px-4">
                 <button type="button" class="btn btn-primary m-2" data-bs-toggle="modal" data-bs-target="#create-player">Create New Player</button>
             </div>
-            <!--Modal start-->
-            <div class="modal" id="create-player">
+            
+            <div class="modal fade" id="create-player" tabindex="-1" aria-labelledby="createPlayerLabel" aria-hidden="true">
                 <div class="modal-dialog">
-                  <div class="modal-content">
-              
-                    <!-- Modal Header -->
-                    <div class="modal-header">
-                      <h4 class="modal-title">Create Player</h4>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                    </div>
-              
-                    <!-- Modal body -->
-                    <div class="modal-body">
-                        <div class="col-sm-12 col-xl-6">
-                            <div class="bg-light rounded h-100 p-4">
-                                <h6 class="mb-4">Register Football Player</h6>
-                                <div class="form-floating mb-3">
-                                    <input type="text" class="form-control" id="floatingFirstName" placeholder="First Name">
-                                    <label for="floatingFirstName">First Name</label>
-                                </div>
-                                <div class="form-floating mb-3">
-                                    <input type="text" class="form-control" id="floatingLastName" placeholder="Last Name">
-                                    <label for="floatingLastName">Last Name</label>
-                                </div>
-                                <div class="form-floating mb-3">
-                                    <input type="email" class="form-control" id="floatingEmail" placeholder="name@example.com">
-                                    <label for="floatingEmail">Email Address</label>
-                                </div>
-                                <div class="form-floating mb-3">
-                                    <input type="date" class="form-control" id="floatingDOB" placeholder="Date of Birth">
-                                    <label for="floatingDOB">Date of Birth</label>
-                                </div>
-                                <div class="form-floating mb-3">
-                                    <select class="form-select" id="floatingPosition" aria-label="Floating label select example">
-                                        <option selected>Open this select menu</option>
-                                        <option value="Goalkeeper">Goalkeeper</option>
-                                        <option value="Defender">Defender</option>
-                                        <option value="Midfielder">Midfielder</option>
-                                        <option value="Forward">Forward</option>
-                                    </select>
-                                    <label for="floatingPosition">Position</label>
-                                </div>
-                                <div class="form-floating mb-3">
-                                    <input type="text" class="form-control" id="floatingTeam" placeholder="Current Team">
-                                    <label for="floatingTeam">Current Team</label>
-                                </div>
-                                <div class="form-floating mb-3">
-                                    <input type="number" class="form-control" id="floatingJerseyNumber" placeholder="Jersey Number">
-                                    <label for="floatingJerseyNumber">Jersey Number</label>
-                                </div>
-                                <div class="form-floating">
-                                    <textarea class="form-control" placeholder="Leave a comment here" id="floatingComments" style="height: 150px;"></textarea>
-                                    <label for="floatingComments">Comments</label>
-                                </div>
+                    <div class="modal-content">
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="createPlayerLabel">Create Player</h4>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+
+                        <!-- Modal body -->
+                        <div class="modal-body">
+                            <div class="col-sm-12 col-xl-12">
+                                <form action="/player" method="post">
+                                    <div class="bg-light rounded h-100 p-4">
+                                        <h6 class="mb-4">Create New Player</h6>
+                                        <div class="form-floating mb-3">
+                                            <input type="text" class="form-control" id="name" name="name" required>
+                                            <label for="name">Name:</label>
+                                        </div>
+                                        <div class="form-floating mb-3">
+                                            <select class="form-control" id="position" name="position" required>
+                                                <option value="Goalkeeper">Goalkeeper</option>
+                                                <option value="Defender">Defender</option>
+                                                <option value="Midfielder">Midfielder</option>
+                                                <option value="Forward">Forward</option>
+                                            </select>
+                                            <label for="position">Position</label>
+                                        </div>
+                                        <div class="form-floating mb-3">
+                                            <select class="form-control" id="team" name="team" required>
+                                                <option value="">Select a team</option>
+                                                <!-- Teams will be loaded here dynamically -->
+                                            </select>
+                                            <label for="team">Team</label>
+                                        </div>
+                                        <div class="form-floating mb-3">
+                                            <input type="number" class="form-control" id="jersey" name="jersey">
+                                            <label for="jersey">Jersey Number:</label>
+                                        </div>
+                                        <div class="form-floating mb-3">
+                                            <input type="number" class="form-control" id="age" name="age">
+                                            <label for="age">Age:</label>
+                                        </div>
+                                        <div class="form-floating mb-3">
+                                            <input type="number" class="form-control" id="games" name="games">
+                                            <label for="games">Games Played:</label>
+                                        </div>
+                                        <div class="pt-4 px-4">
+                                            <button type="submit" class="btn btn-primary py-3 w-100 mb-4">Create New Player</button>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
-                        </div>  
+                        </div>
+
+                        <!-- Modal footer -->
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
                     </div>
-              
-                    <!-- Modal footer -->
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                    </div>
-              
-                  </div>
                 </div>
             </div>
-              <!--Modal Ends-->
-
 
             <!-- Standings Start -->
             <div class="container-fluid pt-4 px-4">
@@ -115,6 +104,7 @@
                                     <th scope="col">Team</th>
                                     <th scope="col">Jersey Number</th>
                                     <th scope="col">Games Played</th>
+                                    <th scope="col">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -127,13 +117,11 @@
                                         <td>{{team.name}}</td>
                                         <td>{{jersey}}</td>
                                         <td>{{games}}</td>
-                                        
                                         <td>
                                             <!-- Edit Button -->
                                             <button type="button" class="btn btn-square btn-primary m-2">
                                                 <i class="fa fa-edit"></i>
                                             </button>
-                                            
                                             <!-- Delete Button -->
                                             <button type="button" class="btn btn-square btn-danger m-2">
                                                 <i class="fa fa-trash"></i>
@@ -152,19 +140,38 @@
             </div>
             <!-- Standings End -->
 
-
             <!-- Footer Start -->
             {{>footer}}
             <!-- Footer End -->
         </div>
         <!-- Content End -->
 
-
         <!-- Back to Top -->
         <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
     </div>
-
     {{>scripts}}
-</body>
+    <script>
+        // Function to load teams
+        async function loadTeams() {
+            try {
+                const response = await fetch('/api/teams');
+                const teams = await response.json();
+                const teamSelect = document.getElementById('team');
+                teamSelect.innerHTML = '<option value="">Select a team</option>'; // Clear existing options
+                
+                teams.forEach(team => {
+                    const option = document.createElement('option');
+                    option.value = team._id;
+                    option.textContent = team.name;
+                    teamSelect.appendChild(option);
+                });
+            } catch (error) {
+                console.error('Failed to load teams:', error);
+            }
+        }
 
+        // Load teams when the modal is shown
+        document.getElementById('create-player').addEventListener('show.bs.modal', loadTeams);
+    </script>
+</body>
 </html>

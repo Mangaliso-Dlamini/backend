@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Announcement = require('../models/Announcement');
 
-router.get('/announcements', async (req, res) => {
+router.get('/', async (req, res) => {
     try {
         const announcements = await Announcement.find();
         res.json(announcements);
@@ -25,7 +25,7 @@ router.post('/', async (req, res) => {
     }
 });
 
-router.delete('/announcements/:id', async (req, res) => {
+router.delete('/:id', async (req, res) => {
     try {
         const removedAnnouncement = await Announcement.findByIdAndRemove(req.params.id);
         res.json(removedAnnouncement);

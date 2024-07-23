@@ -15,6 +15,17 @@ router.post('/', async (req, res) => {
   }
 });
 
+router.get('/', async (req, res) => {
+  try {
+    const teams = await Team.find()
+    console.log(teams)
+    res.status(200).json(teams);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
+
+
 // Get a team by ID
 router.get('/:id', async (req, res) => {
   try {
