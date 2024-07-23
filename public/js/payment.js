@@ -6,8 +6,9 @@ window.paypal
       layout: 'vertical', //default value. Can be changed to horizontal
     },
     async createOrder() {
+      const paymentId = $("#_id").text();
       try {
-        const response = await fetch("/api/orders", {
+        const response = await fetch(`/api/orders/${paymentId}/create-order`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

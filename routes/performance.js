@@ -14,6 +14,23 @@ router.post('/', async (req, res) => {
   }
 });
 
+router.get('/get-performance-data', async (req, res) => {
+  const playerId = '669f4d366761fca9af4d125a';
+
+  try {
+    const performance = await Performance.findOne({ player: playerId });
+
+    if (!performance) {
+      return res.status(404).json({ error: 'No performance data found for the player' });
+    }
+
+    res.json(Object.fromEntries(performance.metrics));
+  } catch (error) {
+    console.error('Error querying performance data:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
 // Get performance by player ID
 router.get('/:id', async (req, res) => {
   try {

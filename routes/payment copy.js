@@ -2,7 +2,6 @@ const router = require("./auth");
 const { PAYPAL_CLIENT_ID, PAYPAL_CLIENT_SECRET} = process.env;
 const base = "https://api-m.sandbox.paypal.com";
 require('dotenv').config();
-const Payment = require('../models/Payment')
 
 /**
  * Generate an OAuth 2.0 access token for authenticating with PayPal REST APIs.
@@ -49,8 +48,8 @@ const createOrder = async (cart) => {
     purchase_units: [
       {
         amount: {
-          currency_code: cart.currency,
-          value: cart.amount,
+          currency_code: "USD",
+          value: "100.00",
         },
       },
     ],
@@ -110,20 +109,11 @@ async function handleResponse(response) {
   }
 }
 
-router.post("/:id/create-order", async (req, res) => {
-  const payment = await Payment.findById(req.params.id);
-  if (!payment) {
-    return res.status(404).send('Payment request not found');
-  }
-  if (payment.paid) {
-    return res.status(400).send('Payment request already paid');
-  }
-
+router.post("/", async (req, res) => {
   try {
     // use the cart information passed from the front-end to calculate the order amount detals
-    const { cart } = payment;
-    
-    const { jsonResponse, httpStatusCode } = await createOrder(payment);
+    const { cart } = req.body;
+    const { jsonResponse, httpStatusCode } = await createOrder(cart);
     res.status(httpStatusCode).json(jsonResponse);
   } catch (error) {
     console.error("Failed to create order:", error);

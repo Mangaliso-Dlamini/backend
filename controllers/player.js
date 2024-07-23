@@ -1,4 +1,4 @@
-const Player = require('../models/Player'); // Adjust the path as necessary
+const Player = require('../models/Player');
 
 async function getAllPlayersWithTeamName() {
   try {
