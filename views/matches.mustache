@@ -40,46 +40,49 @@
             
                     <!-- Modal body -->
                     <div class="modal-body">
-                        <div class="col-sm-12 col-xl-6">
+                        <div class="col-sm-12 col-xl-12">
                             <div class="bg-light rounded h-100 p-4">
-                                <h6 class="mb-4">Register Football Match</h6>
-                                <div class="form-floating mb-3">
-                                    <input type="text" class="form-control" id="floatingMatchTitle" placeholder="Match Title">
-                                    <label for="floatingMatchTitle">Match Title</label>
-                                </div>
-                                <div class="form-floating mb-3">
-                                    <input type="text" class="form-control" id="floatingTeam1" placeholder="Team 1">
-                                    <label for="floatingTeam1">Team 1</label>
-                                </div>
-                                <div class="form-floating mb-3">
-                                    <input type="text" class="form-control" id="floatingTeam2" placeholder="Team 2">
-                                    <label for="floatingTeam2">Team 2</label>
-                                </div>
-                                <div class="form-floating mb-3">
-                                    <input type="date" class="form-control" id="floatingMatchDate" placeholder="Match Date">
-                                    <label for="floatingMatchDate">Match Date</label>
-                                </div>
-                                <div class="form-floating mb-3">
-                                    <input type="time" class="form-control" id="floatingMatchTime" placeholder="Match Time">
-                                    <label for="floatingMatchTime">Match Time</label>
-                                </div>
-                                <div class="form-floating mb-3">
-                                    <input type="text" class="form-control" id="floatingStadium" placeholder="Stadium">
-                                    <label for="floatingStadium">Stadium</label>
-                                </div>
-                                <div class="form-floating mb-3">
-                                    <select class="form-select" id="floatingReferee" aria-label="Floating label select example">
-                                        <option selected>Open this select menu</option>
-                                        <option value="Referee 1">Referee 1</option>
-                                        <option value="Referee 2">Referee 2</option>
-                                        <option value="Referee 3">Referee 3</option>
-                                    </select>
-                                    <label for="floatingReferee">Referee</label>
-                                </div>
-                                <div class="form-floating">
-                                    <textarea class="form-control" placeholder="Leave a comment here" id="floatingMatchComments" style="height: 150px;"></textarea>
-                                    <label for="floatingMatchComments">Comments</label>
-                                </div>
+                                <h6 class="mb-4">Schedule A Match</h6>
+                                <form action="/api/match" method="post"> 
+                                    <div class="form-floating mb-3">
+                                        <input type="datetime-local" class="form-control" id="date" name="date" placeholder="Match Title">
+                                        <label for="date">Date</label>
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                        <select class="form-control" id="homeTeam" name="homeTeam" required>
+                                            <option value="">Select a team</option>
+                                            <!-- Teams will be loaded here dynamically -->
+                                        </select>
+                                        <label for="homeTeam">Home Team</label>
+                                    </div>                                     
+                                    <div class="form-floating mb-3">
+                                        <select class="form-control" id="awayTeam" name="awayTeam" required>
+                                            <option value="">Select a team</option>
+                                            <!-- Teams will be loaded here dynamically -->
+                                        </select>
+                                        <label for="awayTeam">Team</label>
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                        <input type="text" class="form-control" id="result" name="result" placeholder="Result">
+                                        <label for="result">Result</label>
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                        <label for="status">Status:</label>
+                                        <select id="status" class="form-control" name="status">
+                                            <option value="scheduled">Scheduled</option>
+                                            <option value="ongoing">Ongoing</option>
+                                            <option value="completed">Completed</option>
+                                            <option value="postponed">Postponed</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                        <input type="text" class="form-control" id="venue" name="venue" placeholder="Stadium">
+                                        <label for="venue">Stadium</label>
+                                    </div>
+                                    <div class="pt-4 px-4">
+                                        <button type="submit" class="btn btn-primary py-3 w-100 mb-4">Create New Team</button>
+                                    </div>
+                                </form>                          
                             </div>
                         </div>                        
                     </div>
@@ -106,7 +109,7 @@
                                 <img class="rounded-circle flex-shrink-0" src="img/teamA.png" alt="" style="width: 40px; height: 40px;">
                                 <div class="w-100 ms-3">
                                     <div class="d-flex w-100 justify-content-between">
-                                        <h6 class="mb-0">{{homeTeam}} {{result}} {{awayTeam}}</h6>
+                                        <h6 class="mb-0">{{homeTeam.name}} {{result}} {{awayTeam.name}}</h6>
                                         <small>{{venue}}</small>
                                     </div>
                                     <span>{{venue}}</span>
@@ -127,8 +130,8 @@
                             <div class="d-flex align-items-center border-bottom py-3">
                                 <div class="fixture">
                                     <div class="fixture-date">{{date}}</div>
-                                    <div class="fixture-teams">{{homeTeam}} vs {{awayTeam}}</div>
-                                    <div class="fixture-time">{{time}}</div>
+                                    <div class="fixture-teams">{{homeTeam.name}} vs {{awayTeam.name}}</div>
+                                    <div class="fixture-time">{{date.time}}</div>
                                     <div class="fixture-location">{{venue}}</div>
                                 </div>
                             </div>
@@ -156,6 +159,38 @@
     </div>
 
     {{>scripts}}
+    <script>
+        // Function to load teams
+        async function loadTeams() {
+            try {
+                const response = await fetch('/api/teams');
+                const teams = await response.json();
+                const homeTeamSelect = document.getElementById('homeTeam');
+                homeTeamSelect.innerHTML = '<option value="">Select a team</option>'; // Clear existing options
+
+                const awayTeamSelect = document.getElementById('awayTeam');
+                awayTeamSelect.innerHTML = '<option value="">Select a team</option>';
+                
+                teams.forEach(team => {
+                    const optionHome = document.createElement('option');
+                    optionHome.value = team._id;
+                    optionHome.textContent = team.name;
+                    homeTeamSelect.appendChild(optionHome);
+
+                    const optionAway = document.createElement('option');
+                    optionAway.value = team._id;
+                    optionAway.textContent = team.name;
+                    awayTeamSelect.appendChild(optionAway);
+
+                });
+            } catch (error) {
+                console.error('Failed to load teams:', error);
+            }
+        }
+
+        // Load teams when the modal is shown
+        document.getElementById('create-match').addEventListener('show.bs.modal', loadTeams);
+    </script>
 </body>
 
 </html>

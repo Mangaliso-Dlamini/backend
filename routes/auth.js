@@ -6,37 +6,28 @@ const bcrypt = require('bcrypt');
 
 // Register endpoint
 router.post('/register', async (req, res) => {
-  const { username, password, role } = req.body;
+  const { username, name, password, role } = req.body;
   try {
     const existingUser = await User.findOne({ username });
     if (existingUser) {
       return res.status(400).send('Username already exists');
     }
-    const newUser = new User({ username, password, role });
+    const newUser = new User({ username,name, password, role });
     await newUser.save();
-    res.status(201).send('User registered successfully');
+    res.status(201).redirect('/login');
   } catch (error) {
     res.status(400).send('Error registering user');
   }
 });
 
 // Login endpoint
-router.post('/login', async (req, res) => {
-  const { username, password } = req.body;
-  try {
-    const user = await User.findOne({ username });
-    if (!user) {
-      return res.status(400).send('Invalid credentials');
-    }
-    const isMatch = await user.comparePassword(password);
-    if (!isMatch) {
-      return res.status(400).send('Invalid credentials');
-    }
-    res.status(200).send('Login successful');
-  } catch (error) {
-    res.status(400).send('Error logging in');
-  }
-});
+router.post('/login', 
+  passport.authenticate('local', { 
+    successRedirect: '/dashboard',
+    failureRedirect: '/login',
+    failureFlash: true 
+  })
+);
 
 // Google OAuth endpoint
 router.get('/google', passport.authenticate('google', { scope: ['profile'] }));
@@ -46,7 +37,7 @@ router.get('/google/callback',
   passport.authenticate('google', { failureRedirect: '/' }),
   (req, res) => {
     // Successful authentication, redirect home.
-    res.redirect('/');
+    res.redirect('/dashboard');
   }
 );
 

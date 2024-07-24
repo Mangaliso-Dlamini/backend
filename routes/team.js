@@ -5,13 +5,15 @@ const Player = require('../models/Player');
 
 // Create a new team
 router.post('/', async (req, res) => {
-  const { name } = req.body;
+  const { name, coach, location, stadium } = req.body;
+
+  console.log(req.body);
   try {
-    const newTeam = new Team({ name });
+    const newTeam = new Team({ name, coach, location, stadium });
     await newTeam.save();
     res.status(201).send('Team created successfully');
   } catch (error) {
-    res.status(400).send('Error creating team');
+    res.status(400).send(error);
   }
 });
 
