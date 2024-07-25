@@ -8,6 +8,15 @@ const performanceController = require('../controllers/performance.js');
 const announcementController = require('../controllers/announcements.js')
 const authMiddleware = require('../middleware/auth.js')
 
+const formatDateAndTime = (matches) => {
+    return matches.map(match => {
+        const dateObj = new Date(match.date);
+        match.dateOnly = dateObj.toLocaleDateString();
+        match.timeOnly = dateObj.toLocaleTimeString();
+        return match;
+    });
+};
+
 const path = require('path');
 const public = path.join(__dirname,'public');
 router.use(express.static(public));
@@ -26,17 +35,31 @@ router.get('/', async(req, res)=> {
     const title = 'Home';
     const fixtures = await matchController.getNextFiveScheduledOrPostponedMatches()
     const results = await matchController.getLastFiveCompletedMatches()
-    res.render('index', {title, fixtures, results});
+    const formattedResults = formatDateAndTime(results);
+    const formattedFixtures = formatDateAndTime(fixtures);
+    res.render('index', {title, results: formattedResults, fixtures: formattedFixtures});
 });
 
-router.get('/dashboard', authMiddleware.ensureAuthenticated, async(req, res)=>{
+router.get('/dashboard', async(req, res)=>{
     console.log(req.session)
     const title = 'Dashboard';
     const nextMatch = await matchController.getNextScheduledMatch()
     const latestMatch = await matchController.getLatestMatch()
     const fixtures = await matchController.getNextFiveScheduledOrPostponedMatches()
     const results = await matchController.getLastFiveCompletedMatches()
-    res.render('dashboard', {title, nextMatch, latestMatch, fixtures, results})
+
+    const formattedResults = formatDateAndTime(results);
+    const formattedFixtures = formatDateAndTime(fixtures);
+
+    
+    nextMatch.dateOnly = nextMatch.date.toLocaleDateString();
+    nextMatch.timeOnly = nextMatch.date.toLocaleTimeString();
+
+   // latestMatch.dateOnly = latestMatch.date.toLocaleDateString();
+    //latestMatch.timeOnly = latestMatch.date.toLocaleTimeString();
+
+
+    res.render('dashboard', {title, nextMatch, latestMatch, results: formattedResults, fixtures: formattedFixtures})
 });
 
 router.get('/teams', async(req, res)=>{
@@ -57,10 +80,16 @@ router.get('/players', async(req, res)=>{
     res.render('players', {title, players})
 });
 
-router.get('/matches', async(req, res)=>{
+router.get('/matches', async (req, res) => {
     const title = 'Schedule';
     const { results, fixtures } = await matchController.getAllMatches();
-    res.render('matches', { title, results, fixtures } )
+
+    // Function to format date and time separately
+
+    const formattedResults = formatDateAndTime(results);
+    const formattedFixtures = formatDateAndTime(fixtures);
+
+    res.render('matches', { title, results: formattedResults, fixtures: formattedFixtures });
 });
 
 /*router.get('/performance', async(req, res)=>{

@@ -1,60 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     {{>header}}
 </head>
+
 <body>
-    <div class="container-xxl position-relative bg-white d-flex p-0">
+    <div class="container-xxl bg-white p-0">
+        <!-- Spinner Start -->
         {{>spinner}}
-        <div class="content">
-            <nav class="navbar navbar-expand bg-light navbar-light sticky-top px-4 py-0">
-                <a href="index" class="navbar-brand d-flex d-lg-none me-4">
-                    <h2 class="text-primary mb-0"><i class="fa fa-hashtag"></i></h2>
+        <!-- Spinner End -->
+
+
+        <!-- Navbar & Hero Start -->
+        <div class="container-xxl position-relative p-0" id="home">
+            <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
+                <a href="" class="navbar-brand p-0">
+                    <h1 class="m-0">Commom Ground</h1>
+                    <!-- <img src="img/logo.png" alt="Logo"> -->
                 </a>
-                <a href="#" class="sidebar-toggler flex-shrink-0">
-                    <i class="fa fa-bars"></i>
-                </a>
-                <form class="d-none d-md-flex ms-4">
-                    <input class="form-control border-0" type="search" placeholder="Search">
-                </form>
-                <div class="navbar-nav align-items-center ms-auto">
-                    <div class="nav-item">
-                        <a href="/login" class="nav-link" > 
-                            <span class="d-none d-lg-inline-flex">Log In</span>
-                        </a>
+                <button class="navbar-toggler rounded-pill" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <div class="navbar-nav mx-auto py-0">
+                        <a href="/home" class="nav-item nav-link">Home</a>
+                        <a href="/login" class="nav-item nav-link">Log In</a>
+                        
                     </div>
-                    <div class="nav-item">
-                        <a href="/register" class="nav-link" >
-                            <span class="d-none d-lg-inline-flex">Register</span>
-                        </a>
-                    </div>
+                    <a href="/register" class="btn btn-light rounded-pill py-2 px-4 ms-3 d-none d-lg-block">Get Started</a>
                 </div>
             </nav>
 
-            <div class="container-fluid pt-4 px-4">
-                <div class="row vh-100 bg-light rounded align-items-center justify-content-center mx-0">
-                    <div class="col-md-6 text-center">
-                        <h3>Welcome To Common Ground Football Managent Platform</h3>
-                        <p>
-                            Hello and welcome to our community of passionate football
-                            enthusiasts! Our platform is dedicated to supporting the
-                            growth and development of grassroots football by providing
-                            a seamless and efficient management experience for teams, 
-                            coaches, players, and fans alike.
-                        </p>
-                        <div class="m-n2">
-                            <a href="/login"><button type="button" class="btn btn-outline-primary m-2"></i>Log In</button></a>
-                            <a href="/register"><button type="button" class="btn btn-primary m-2"><i class="fa fa-home me-2"></i>Get Started</button></a>
+            <div class="container-xxl bg-primary hero-header">
+                <div class="container pt-4 px-4">
+                    <div class="row g-5 align-items-center">
+                        <div class="col-lg-6 text-center text-lg-start">
+                            <h1 class="text-white mb-4 animated slideInDown">Welcome To Common Ground Football Managent Platform</h1>
+                            <p class="text-white pb-3 animated slideInDown">
+                                Hello and welcome to our community of passionate football
+                                enthusiasts! Our platform is dedicated to supporting the
+                                growth and development of grassroots football by providing
+                                a seamless and efficient management experience for teams, 
+                                coaches, players, and fans alike.
+                            </p>
+                            <div class="position-relative w-100 mt-4 pt-4 px-4">
+                                <a href="/register">
+                                    <button type="button" class="btn btn-primary rounded-pill py-2 px-3 shadow-none position-absolute top-0 end-0 m-2">Get Started</button>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 text-center text-lg-start">
+                            <img class="img-fluid rounded animated zoomIn" src="img/hero.png" alt="">
                         </div>
                     </div>
                 </div>
             </div>
-            {{>widgets}}
-
-
-            {{>footer}}
         </div>
+        <!-- Navbar & Hero End -->
+        <div class="mb-4 mt-4">
+            {{>widgets}}
+        </div>
+        
+
+        <!-- Footer Start -->
+        <div class="container-fluid bg-dark text-body footer wow fadeIn pt-4 px-4" data-wow-delay="0.1s">
+            <div class="container px-lg-5">
+                <div class="copyright">
+                    <div class="row">
+                        <div class="col-12 col-sm-6 text-center text-sm-start">
+                            &copy; <a href="#">Common Ground</a>, All Right Reserved. 
+                        </div>
+                        <div class="col-12 col-sm-6 text-center text-sm-end">
+                            Designed By Mangaliso Linda Dlamini
+                        </br>
+                        S2110978
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer End -->
+
+
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
     </div>
+
     {{>scripts}}
 </body>
+
 </html>
