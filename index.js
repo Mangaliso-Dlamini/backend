@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const oneDay = 24 * 60 * 60 * 1000;
 
 
 const app = express();
@@ -67,12 +68,6 @@ mongoose.connect('mongodb+srv://mdlamini:hQcXeAtFUeKyQtEx@hp.54gjgph.mongodb.net
     .catch((error) => {
         console.error('Error connecting to MongoDB:', error);
     });
-
-
-// Example root route
-app.get('/', (req, res) => {
-  res.send('Welcome to Grassroots Football Management Platform');
-});
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

@@ -71,7 +71,7 @@ async function createCharts() {
                 },
                 title: {
                     display: true,
-                    text: 'Historic Minutes per Goal Ratio',
+                    text: 'Historical Minutes per Goal Ratio',
                     font: {
                         size: 24
                     }
@@ -122,7 +122,7 @@ async function createCharts() {
                 },
                 title: {
                     display: true,
-                    text: 'Historic Shot Accuracy (%)',
+                    text: 'Historical Shot Accuracy (%)',
                     font: {
                         size: 24
                     }
@@ -173,7 +173,7 @@ async function createCharts() {
                 },
                 title: {
                     display: true,
-                    text: 'Historic Pass Accuracy (%)',
+                    text: 'Historical Pass Accuracy (%)',
                     font: {
                         size: 24
                     }
@@ -224,7 +224,7 @@ async function createCharts() {
                 },
                 title: {
                     display: true,
-                    text: 'Historic Tackle Win Rate (%)',
+                    text: 'Historical Tackle Win Rate (%)',
                     font: {
                         size: 24
                     }

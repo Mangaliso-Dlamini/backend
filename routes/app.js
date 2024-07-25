@@ -6,7 +6,7 @@ const playerController = require('../controllers/player.js')
 const paymentController = require('../controllers/payment.js');
 const performanceController = require('../controllers/performance.js');
 const announcementController = require('../controllers/announcements.js')
-const authMiddleware = require('../middleware/auth.js')
+const auth = require('../middleware/auth.js')
 
 const formatDateAndTime = (matches) => {
     return matches.map(match => {
@@ -40,7 +40,7 @@ router.get('/', async(req, res)=> {
     res.render('index', {title, results: formattedResults, fixtures: formattedFixtures});
 });
 
-router.get('/dashboard', async(req, res)=>{
+router.get('/dashboard', auth.ensureAuthenticated, async(req, res)=>{
     console.log(req.session)
     const title = 'Dashboard';
     const nextMatch = await matchController.getNextScheduledMatch()
@@ -62,7 +62,7 @@ router.get('/dashboard', async(req, res)=>{
     res.render('dashboard', {title, nextMatch, latestMatch, results: formattedResults, fixtures: formattedFixtures})
 });
 
-router.get('/teams', async(req, res)=>{
+router.get('/teams', auth.ensureAuthenticated, async(req, res)=>{
     const title = 'Teams';
     const teams = await teamController.getAllTeamsWithPlayerCount();
     teams.forEach((team, index) => {
@@ -71,7 +71,7 @@ router.get('/teams', async(req, res)=>{
     res.render('teams', {title, teams})
 });
 
-router.get('/players', async(req, res)=>{
+router.get('/players', auth.ensureAuthenticated, async(req, res)=>{
     const title = 'Players';
     const players =  await playerController.getAllPlayersWithTeamName();
     players.forEach((player, index) => {
@@ -80,7 +80,7 @@ router.get('/players', async(req, res)=>{
     res.render('players', {title, players})
 });
 
-router.get('/matches', async (req, res) => {
+router.get('/matches', auth.ensureAuthenticated,  async (req, res) => {
     const title = 'Schedule';
     const { results, fixtures } = await matchController.getAllMatches();
 
@@ -101,7 +101,7 @@ router.get('/matches', async (req, res) => {
     res.render('performance',{title, overallStats, player});
 });*/
 
-router.get('/performance/:id', async(req, res)=>{
+router.get('/performance/:id', auth.ensureAuthenticated, async(req, res)=>{
     const title = 'Player Performance';
     console.log(req.params)
     //const seasonStats = await performanceController.getPerformanceMetrics(req.param.id, "2024");
@@ -111,22 +111,22 @@ router.get('/performance/:id', async(req, res)=>{
     res.render('performance',{title, overallStats, player});
 });
 
-router.get('/messages', async(req, res)=>{
+router.get('/messages', auth.ensureAuthenticated, async(req, res)=>{
     const title = 'Messanger';
     res.render('messages', {title})
 });
 
-router.get('/leagues', async(req, res)=>{
+router.get('/leagues', auth.ensureAuthenticated, async(req, res)=>{
     const title = 'Leagues';
     res.render('leagues', {title})
 });
 
-router.get('/training', async(req, res)=>{
+router.get('/training', auth.ensureAuthenticated, async(req, res)=>{
     const title = 'Traing Sessions';
     res.render('training', title);
 })
 
-router.get('/payments', async(req, res)=>{
+router.get('/payments', auth.ensureAuthenticated, async(req, res)=>{
     const title = 'Payments';
     const payments = await paymentController.getAllPayments();
     payments.forEach((payment, index) => {
@@ -136,13 +136,13 @@ router.get('/payments', async(req, res)=>{
     res.render('payments', {title, payments})
 })
 
-router.get('/recommender', async(req, res)=>{
+router.get('/recommender', auth.ensureAuthenticated, async(req, res)=>{
     const title = 'Training Focus Recommender';
     res.render('recommender', {title});
 });
 
 
-router.get('/announcements', async(req, res)=>{
+router.get('/announcements', auth.ensureAuthenticated,  async(req, res)=>{
     const title = 'Announcements';
     const announcements = await announcementController.getAnnouncements();
     res.render('announcements', {title, announcements})
