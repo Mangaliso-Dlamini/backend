@@ -21,13 +21,31 @@ router.post('/register', async (req, res) => {
 });
 
 // Login endpoint
-router.post('/login', 
+/*router.post('/login', 
   passport.authenticate('local', { 
     successRedirect: '/dashboard',
     failureRedirect: '/login',
     failureFlash: true 
   })
-);
+);*/
+
+router.post('/login', (req, res, next) => {
+  passport.authenticate('local', (err, user, info) => {
+    if (err) {
+      return next(err);
+    }
+    if (!user) {
+      return res.redirect('/login');
+    }
+    req.logIn(user, (err) => {
+      if (err) {
+        return next(err);
+      }
+      req.session.user = { role: user.role };
+      return res.redirect('/dashboard');
+    });
+  })(req, res, next);
+});
 
 // Google OAuth endpoint
 router.get('/google', passport.authenticate('google', { scope: ['profile'] }));

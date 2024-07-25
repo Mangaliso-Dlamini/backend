@@ -123,9 +123,11 @@
                                                 <i class="fa fa-edit"></i>
                                             </button>
                                             <!-- Delete Button -->
-                                            <button type="button" class="btn btn-square btn-danger m-2">
-                                                <i class="fa fa-trash"></i>
-                                            </button>
+                                             <a href="/api/players/delete/{{_id}}">
+                                                <button type="button" class="btn btn-square btn-danger m-2">
+                                                    <i class="fa fa-trash"></i>
+                                                </button>
+                                             </a>
                                         </td>
                                     </tr>
                                 {{/players}}

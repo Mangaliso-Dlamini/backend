@@ -38,27 +38,36 @@ router.get('/:id', async (req, res) => {
 });
 
 // Update a match by ID
-router.patch('/:id', async (req, res) => {
-  const updates = Object.keys(req.body);
-  const allowedUpdates = ['date', 'homeTeam', 'awayTeam', 'result', 'status', 'venue'];
-  const isValidOperation = updates.every(update => allowedUpdates.includes(update));
+router.post('/update/:id', async (req, res) => {
+  const { id } = req.params;
+  const { date, homeGoals, awayGoals, status, venue } = req.body;
 
-  if (!isValidOperation) {
-    return res.status(400).send({ error: 'Invalid updates!' });
-  }
+  // Construct the score object
+  const score = {
+    homeGoals: homeGoals !== undefined ? homeGoals : 0,
+    awayGoals: awayGoals !== undefined ? awayGoals : 0
+  };
+
+  const updates = {
+    date,
+    score,
+    status,
+    venue
+  };
 
   try {
-    const match = await Match.findById(req.params.id);
+    const match = await Match.findByIdAndUpdate(id, updates, {
+      new: true, // Return the updated document
+      runValidators: true, // Run schema validators
+    });
 
     if (!match) {
-      return res.status(404).send();
+      return res.status(404).send('Match not found');
     }
 
-    updates.forEach(update => match[update] = req.body[update]);
-    await match.save();
-    res.status(200).send(match);
+    res.redirect(req.get('referer'))
   } catch (error) {
-    res.status(400).send(error);
+    res.status(400).send(error.message);
   }
 });
 

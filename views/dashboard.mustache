@@ -31,18 +31,18 @@
                             <div class="d-flex align-items-center justify-content-between mb-4">
                                 <h6 class="mb-0">Latest Match</h6>
                             </div>
-                            {{#lastestMatch}}
+                            {{#latestMatch}}
                             <div class="scoreline">
-                                <h4>{{homeTeam.name}} {{result}} {{awayTeam.name}}</h4>
+                                <h4>{{homeTeam.name}} {{score.homeGoals}} : {{score.awayGoals}} {{awayTeam.name}}</h4>
                                 <p>Match Date: {{dateOnly}} Time: {{timeOnly}}</p>
                                 <p>Location: {{venue}} Status: {{status}}</p>
                             </div>
-                            {{/lastestMatch}}
-                            {{^lastestMatch}}
+                            {{/latestMatch}}
+                            {{^latestMatch}}
                                 <div>
                                     <h2>No Latest Match Available</h2>
                                 </div>
-                            {{/lastestMatch}}
+                            {{/latestMatch}}
                         </div>
                     </div>
                     <div class="col-sm-12 col-xl-6">

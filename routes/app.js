@@ -55,8 +55,8 @@ router.get('/dashboard', auth.ensureAuthenticated, async(req, res)=>{
     nextMatch.dateOnly = nextMatch.date.toLocaleDateString();
     nextMatch.timeOnly = nextMatch.date.toLocaleTimeString();
 
-   // latestMatch.dateOnly = latestMatch.date.toLocaleDateString();
-    //latestMatch.timeOnly = latestMatch.date.toLocaleTimeString();
+    latestMatch.dateOnly = latestMatch.date.toLocaleDateString();
+    latestMatch.timeOnly = latestMatch.date.toLocaleTimeString();
 
 
     res.render('dashboard', {title, nextMatch, latestMatch, results: formattedResults, fixtures: formattedFixtures})

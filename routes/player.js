@@ -1,6 +1,7 @@
 const express = require('express');
 const Player = require('../models/Player');
-const Team = require('../models/Team')
+const Team = require('../models/Team');
+const { ensureAdmin } = require('../middleware/auth');
 
 const router = express.Router();
 
@@ -23,5 +24,20 @@ router.get('/', async (req, res) => {
       res.status(500).send(error);
     }
   });
+
+  router.get('/delete/:id', ensureAdmin, async (req, res) => {
+    try {
+      const player = await Player.findByIdAndDelete(req.params.id);
+  
+      if (!player) {
+        return res.status(404).send();
+      }
+  
+      res.redirect(req.get('referer'))
+    } catch (error) {
+      res.status(500).send(error);
+    }
+  });
+  
   
   module.exports = router;
