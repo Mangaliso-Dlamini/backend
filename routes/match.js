@@ -8,7 +8,7 @@ router.post('/', async (req, res) => {
   try {
     const match = new Match(req.body);
     await match.save();
-    res.status(201).send(match);
+    res.redirect(req.get('referer'))
   } catch (error) {
     res.status(400).send(error);
   }

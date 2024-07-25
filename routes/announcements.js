@@ -19,7 +19,7 @@ router.post('/', async (req, res) => {
 
     try {
         const savedAnnouncement = await announcement.save();
-        res.status(201).json(savedAnnouncement);
+        res.redirect(req.get('referer'))
     } catch (err) {
         res.status(400).send(err);
     }
