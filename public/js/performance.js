@@ -1,6 +1,9 @@
 async function fetchData() {
-    const response = await fetch('/api/performance/get-performance-data');
+    const id = document.getElementById('id').textContent
+    console.log(id)
+    const response = await fetch(`/api/performance/${id}`);
     const data = await response.json();
+    console.log(data)
     return data;
 }
 

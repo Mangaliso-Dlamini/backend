@@ -8,6 +8,10 @@ const performanceController = require('../controllers/performance.js');
 const announcementController = require('../controllers/announcements.js')
 const authMiddleware = require('../middleware/auth.js')
 
+const path = require('path');
+const public = path.join(__dirname,'public');
+router.use(express.static(public));
+
 router.get('/login', async (req, res) => {
  const title = 'Log In';
  res.render('login',{title})
@@ -59,11 +63,21 @@ router.get('/matches', async(req, res)=>{
     res.render('matches', { title, results, fixtures } )
 });
 
-router.get('/performance', async(req, res)=>{
+/*router.get('/performance', async(req, res)=>{
     const title = 'Player Performance';
     //const seasonStats = await performanceController.getPerformanceMetrics("669f4d366761fca9af4d125a", "2024");
     const overallStats = await performanceController.getOverallPerformanceMetrics("669f4d366761fca9af4d125a");
     const player = await playerController.getPlayerWithTeamName("669f4d366761fca9af4d125a");
+    console.log(overallStats)
+    res.render('performance',{title, overallStats, player});
+});*/
+
+router.get('/performance/:id', async(req, res)=>{
+    const title = 'Player Performance';
+    console.log(req.params)
+    //const seasonStats = await performanceController.getPerformanceMetrics(req.param.id, "2024");
+    const overallStats = await performanceController.getOverallPerformanceMetrics(req.params.id);
+    const player = await playerController.getPlayerWithTeamName(req.params.id);
     console.log(overallStats)
     res.render('performance',{title, overallStats, player});
 });

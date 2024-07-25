@@ -44,6 +44,8 @@ const messagesRouter = require('./routes/messages');
 const announcementRouter = require('./routes/announcements')
 const playerRouter = require("./routes/player");
 const matchesRoutes = require('./routes/match')
+const leaguesRoutes = require('./routes/league')
+app.use('/api/leagues', leaguesRoutes)
 app.use('/api/match', matchesRoutes);
 app.use('/api/players', playerRouter)
 app.use('/api/announcements', announcementRouter);

@@ -33,11 +33,19 @@ router.get('/get-performance-data', async (req, res) => {
 
 // Get performance by player ID
 router.get('/:id', async (req, res) => {
+  const playerId = req.params.id
+
   try {
-    const performance = await Performance.find({ player: req.params.id }).populate('player');
-    res.status(200).json(performance);
+    const performance = await Performance.findOne({ player: playerId });
+
+    if (!performance) {
+      return res.status(404).json({ error: 'No performance data found for the player' });
+    }
+
+    res.json(Object.fromEntries(performance.metrics));
   } catch (error) {
-    res.status(400).send('Error fetching performance');
+    console.error('Error querying performance data:', error);
+    res.status(500).json({ error: 'Internal server error' });
   }
 });
 
