@@ -6,8 +6,6 @@ const PlayerSchema = new mongoose.Schema({
   team: { type: mongoose.Schema.Types.ObjectId, ref: 'Team' },
   jersey: Number,
   age: Number,
-  games: Number
-
 });
 
 module.exports = mongoose.model('Player', PlayerSchema);

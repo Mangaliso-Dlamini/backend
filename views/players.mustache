@@ -103,7 +103,6 @@
                                     <th scope="col">Position</th>
                                     <th scope="col">Team</th>
                                     <th scope="col">Jersey Number</th>
-                                    <th scope="col">Games Played</th>
                                     <th scope="col">Actions</th>
                                 </tr>
                             </thead>
@@ -116,15 +115,106 @@
                                         <td>{{position}}</td>
                                         <td>{{team.name}}</td>
                                         <td>{{jersey}}</td>
-                                        <td>{{games}}</td>
                                         <td>
+                                            <!--Update performance Button-->
+                                            <button type="button" class="btn btn-square btn-outline-primary m-2" data-bs-toggle="modal" data-bs-target="#update-performance{{_id}}">
+                                                <i class="fa fa-chart-line"></i>
+                                            </button>
+                                            <div class="modal fade" id="update-performance{{_id}}" tabindex="-1" aria-labelledby="updatePerformanceLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <!-- Modal Header -->
+                                                        <div class="modal-header">
+                                                            <h4 class="modal-title" id="updatePerformanceLabel">Update Player Performance</h4>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                            
+                                                        <!-- Modal Body -->
+                                                        <div class="modal-body">
+                                                            <div class="col-sm-12 col-xl-12">
+                                                                <form action="/api/performance/{{_id}}" method="post">
+                                                                    <div class="bg-light rounded h-100 p-4">
+                                                                        <h6 class="mb-4">Update Performance for {{name}}</h6>
+                                                                        <div class="form-floating mb-3">
+                                                                            <input type="number" class="form-control" id="year" name="year" required>
+                                                                            <label for="year">Year:</label>
+                                                                        </div>
+                                                                        <div class="form-floating mb-3">
+                                                                            <input type="number" class="form-control" id="goals" name="goals">
+                                                                            <label for="goals">Goals:</label>
+                                                                        </div>
+                                                                        <div class="form-floating mb-3">
+                                                                            <input type="number" class="form-control" id="assists" name="assists">
+                                                                            <label for="assists">Assists:</label>
+                                                                        </div>
+                                                                        <div class="form-floating mb-3">
+                                                                            <input type="number" class="form-control" id="appearances" name="appearances">
+                                                                            <label for="appearances">Appearances:</label>
+                                                                        </div>
+                                                                        <div class="form-floating mb-3">
+                                                                            <input type="number" class="form-control" id="minutes" name="minutes">
+                                                                            <label for="minutes">Minutes:</label>
+                                                                        </div>
+                                                                        <div class="form-floating mb-3">
+                                                                            <input type="number" class="form-control" id="shotsOnTarget" name="shotsOnTarget">
+                                                                            <label for="shotsOnTarget">Shots on Target:</label>
+                                                                        </div>
+                                                                        <div class="form-floating mb-3">
+                                                                            <input type="number" class="form-control" id="shotsOffTarget" name="shotsOffTarget">
+                                                                            <label for="shotsOffTarget">Shots off Target:</label>
+                                                                        </div>
+                                                                        <div class="form-floating mb-3">
+                                                                            <input type="number" class="form-control" id="passesAttempted" name="passesAttempted">
+                                                                            <label for="passesAttempted">Passes Attempted:</label>
+                                                                        </div>
+                                                                        <div class="form-floating mb-3">
+                                                                            <input type="number" class="form-control" id="passesCompleted" name="passesCompleted">
+                                                                            <label for="passesCompleted">Passes Completed:</label>
+                                                                        </div>
+                                                                        <div class="form-floating mb-3">
+                                                                            <input type="number" class="form-control" id="tacklesAttempted" name="tacklesAttempted">
+                                                                            <label for="tacklesAttempted">Tackles Attempted:</label>
+                                                                        </div>
+                                                                        <div class="form-floating mb-3">
+                                                                            <input type="number" class="form-control" id="tacklesWon" name="tacklesWon">
+                                                                            <label for="tacklesWon">Tackles Won:</label>
+                                                                        </div>
+                                                                        <div class="form-floating mb-3">
+                                                                            <input type="number" class="form-control" id="interceptions" name="interceptions">
+                                                                            <label for="interceptions">Interceptions:</label>
+                                                                        </div>
+                                                                        <div class="form-floating mb-3">
+                                                                            <input type="number" class="form-control" id="clearances" name="clearances">
+                                                                            <label for="clearances">Clearances:</label>
+                                                                        </div>
+                                                                        <div class="form-floating mb-3">
+                                                                            <input type="number" class="form-control" id="injuries" name="injuries">
+                                                                            <label for="injuries">Injuries:</label>
+                                                                        </div>
+                                                                        <div class="pt-4 px-4">
+                                                                            <button type="submit" class="btn btn-primary py-3 w-100 mb-4">Update Performance</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                            
+                                                        <!-- Modal Footer -->
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            
                                             <!-- Edit Button -->
-                                            <button type="button" class="btn btn-square btn-primary m-2">
+                                            <button type="button" class="btn btn-square btn-outline-primary m-2">
                                                 <i class="fa fa-edit"></i>
                                             </button>
                                             <!-- Delete Button -->
                                              <a href="/api/players/delete/{{_id}}">
-                                                <button type="button" class="btn btn-square btn-danger m-2">
+                                                <button type="button" class="btn btn-square btn-outline-danger m-2">
                                                     <i class="fa fa-trash"></i>
                                                 </button>
                                              </a>
