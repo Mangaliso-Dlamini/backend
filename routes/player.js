@@ -2,6 +2,7 @@ const express = require('express');
 const Player = require('../models/Player');
 const Team = require('../models/Team');
 const { ensureAdmin } = require('../middleware/auth');
+const Performance = require('../models/Performance')
 
 const router = express.Router();
 
@@ -13,6 +14,8 @@ router.post('/', async (req, res) => {
     await newPlayer.save();
     teamToAssign.players.push(newPlayer);
     await teamToAssign.save();
+    const performance = new Performance({player: newPlayer})
+    await performance.save();
     res.redirect(req.get('referer')) 
   });
 
